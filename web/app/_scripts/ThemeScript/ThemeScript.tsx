@@ -1,7 +1,9 @@
 import { COOKIES } from '@/src/constants';
 
+// Блокирующий скрипт применяет тему до первой отрисовки, иначе будет вспышка светлой темы
 export const ThemeScript = () => (
   <script
+    // eslint-disable-next-line react/dom-no-dangerously-set-innerhtml
     dangerouslySetInnerHTML={{
       __html: `
       (function() {
@@ -16,7 +18,7 @@ export const ThemeScript = () => (
           return null;
         };
         
-        const theme = getCookie('${COOKIES.THEME}') || 'system';
+        const theme = getCookie('${COOKIES.THEME}') || 'dark';
         const activeTheme = theme === 'system' ? getSystemTheme() : theme;
         
         document.documentElement.classList.add(activeTheme);

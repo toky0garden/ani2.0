@@ -3,11 +3,15 @@ import type { ReactNode } from 'react';
 import { getCookie, setCookie, usePreferredColorScheme } from '@siberiacancode/reactuse';
 import { useLayoutEffect, useMemo, useState } from 'react';
 
+import { COOKIES } from '@/src/constants';
 
 import type { Theme } from './ThemeContext';
 
 import { ThemeContext } from './ThemeContext';
-import { COOKIES } from '@/src/constants';
+
+interface ViewTransitionDocument {
+  startViewTransition?: Document['startViewTransition'];
+}
 
 const getSystemTheme = () => {
   if (typeof window === 'undefined') return 'light';
@@ -26,8 +30,8 @@ export interface ThemeProviderProps {
 export const ThemeProvider = ({ children }: ThemeProviderProps) => {
   const colorScheme = usePreferredColorScheme();
   const [theme, setTheme] = useState<Theme>(() => {
-    if (typeof window === 'undefined') return 'system';
-    return (getCookie(COOKIES.THEME) as Theme | undefined) ?? 'system';
+    if (typeof window === 'undefined') return 'dark';
+    return (getCookie(COOKIES.THEME) as Theme | undefined) ?? 'dark';
   });
 
   useLayoutEffect(() => {
@@ -42,9 +46,17 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
   }, [theme, colorScheme]);
 
   const animate = async (x: number, y: number, theme: Theme) => {
+    // Safari < 18 и Firefox не поддерживают View Transitions — переключаем тему без анимации
+    const view: ViewTransitionDocument = document;
+
+    if (!view.startViewTransition) {
+      setTheme(theme);
+      return;
+    }
+
     const radius = Math.hypot(window.innerWidth, window.innerHeight);
 
-    await document.startViewTransition(() => {
+    await view.startViewTransition(() => {
       setTheme(theme);
     }).ready;
 

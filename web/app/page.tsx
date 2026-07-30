@@ -1,19 +1,25 @@
-import { Button } from "@/src/components/ui/button"
+import type { Metadata } from 'next';
 
-export default function Page() {
-  return (
-    <div className="flex min-h-svh p-6">
-      <div className="flex max-w-md min-w-0 flex-col gap-4 text-sm leading-loose">
-        <div>
-          <h1 className="font-medium">Project ready!</h1>
-          <p>You may now add components and start building.</p>
-          <p>We&apos;ve already added the button component for you.</p>
-          <Button className="mt-2">Button</Button>
-        </div>
-        <div className="font-mono text-xs text-muted-foreground">
-          (Press <kbd>d</kbd> to toggle dark mode)
-        </div>
-      </div>
-    </div>
-  )
-}
+import { NEW_RELEASES, NOW_WATCHING } from '@/src/constants';
+
+import { AnimeSection, LatestUpdatesSection } from './_components/landing';
+
+export const metadata: Metadata = {
+  title: 'Animi Club — смотреть аниме онлайн',
+  description:
+    'Каталог аниме с расписанием выхода серий, подборками и отслеживанием новых эпизодов.'
+};
+
+const HomePage = () => (
+  <main className='content-container flex flex-col gap-8 py-7'>
+    <AnimeSection priority anime={NOW_WATCHING} title='Сейчас смотрят' />
+
+    <AnimeSection anime={NEW_RELEASES} title='Новинки' />
+
+    <LatestUpdatesSection />
+  </main>
+);
+
+export const revalidate = 3600;
+
+export default HomePage;
