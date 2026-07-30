@@ -9,8 +9,9 @@ import { cn } from '@/src/lib/utils';
 
 import { ThemeSwitch } from '../ThemeSwitch/ThemeSwitch';
 
+// Авторизации нет, поэтому профиль всегда один и тот же — свой
 const MENU = [
-  { href: '/profile', label: 'Профиль', icon: UserIcon },
+  { href: '/profile/tokyogarden', label: 'Профиль', icon: UserIcon },
   { href: '/favorites', label: 'Избранное', icon: HeartIcon },
   { href: '/settings', label: 'Настройки', icon: SettingsIcon }
 ] as const;

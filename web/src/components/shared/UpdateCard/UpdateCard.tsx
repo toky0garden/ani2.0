@@ -17,7 +17,7 @@ export const UpdateCard = ({ update, className }: UpdateCardProps) => (
       'flex items-center gap-3 rounded-12 bg-surface p-3 ring-1 ring-border-soft transition-colors outline-none hover:bg-surface-hover focus-visible:ring-2 focus-visible:ring-ring',
       className
     )}
-    href={`/${update.anime.slug}`}
+    href={`/anime/${update.anime.slug}`}
   >
     <div className='relative h-10 w-14 shrink-0 overflow-hidden rounded-8'>
       <Image

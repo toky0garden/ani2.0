@@ -50,7 +50,7 @@ export const AnimeActions = ({ title, className }: AnimeActionsProps) => {
         <HeartIcon
           className={cn('transition-colors', favorite && 'fill-accent-primary text-accent-primary')}
         />
-        {favorite ? 'В избранном' : 'В список'}
+        {favorite ? 'В избранном' : 'Избранное'}
       </Button>
 
       <Button

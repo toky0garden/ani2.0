@@ -1,6 +1,6 @@
 export const ROUTES = [
   { href: '/', label: 'Главная' },
-  { href: '/catalog', label: 'Каталог' },
+  { href: '/library', label: 'Каталог' },
   { href: '/schedule', label: 'Расписание' },
   { href: '/collections', label: 'Подборки' }
 ];

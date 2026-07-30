@@ -16,7 +16,7 @@ export interface AnimeCardProps {
 export const AnimeCard = ({ anime, className, priority = false }: AnimeCardProps) => (
   <Link
     className={cn('group flex flex-col gap-2 outline-none', className)}
-    href={`/${anime.slug}`}
+    href={`/anime/${anime.slug}`}
   >
     <div className='relative aspect-2/3 overflow-hidden rounded-12 bg-surface ring-1 ring-border-soft transition-[transform,box-shadow] duration-300 group-hover:-translate-y-1 group-hover:ring-accent-primary group-focus-visible:ring-2 group-focus-visible:ring-ring'>
       <Image

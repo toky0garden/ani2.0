@@ -10,7 +10,7 @@ import { AnimeHero, EpisodeList } from './_components';
 
 export const generateStaticParams = () => CATALOG.map((anime) => ({ slug: anime.slug }));
 
-export const generateMetadata = async ({ params }: PageProps<'/[slug]'>): Promise<Metadata> => {
+export const generateMetadata = async ({ params }: PageProps<'/anime/[slug]'>): Promise<Metadata> => {
   const { slug } = await params;
   const anime = CATALOG.find((item) => item.slug === slug);
 
@@ -27,7 +27,7 @@ export const generateMetadata = async ({ params }: PageProps<'/[slug]'>): Promis
   };
 };
 
-const AnimePage = async ({ params }: PageProps<'/[slug]'>) => {
+const AnimePage = async ({ params }: PageProps<'/anime/[slug]'>) => {
   const { slug } = await params;
   const anime = CATALOG.find((item) => item.slug === slug);
 
@@ -66,5 +66,7 @@ const AnimePage = async ({ params }: PageProps<'/[slug]'>) => {
     </main>
   );
 };
+
+export const revalidate = 7200;
 
 export default AnimePage;
